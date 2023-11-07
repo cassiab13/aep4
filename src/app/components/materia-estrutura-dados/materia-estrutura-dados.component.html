@@ -1,0 +1,16 @@
+<div class="quiz-container">
+  <h2>{{ questions[currentQuestionIndex].question }}</h2>
+  <ul>
+    <li *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
+      <button class="button-option" (click)="checkAnswer(option)">
+        {{ generateAlphabetLetter(i)+')' }} {{ option.label }}
+      </button>
+    </li>
+  </ul>
+  <p class="score">Pontuação: {{ score }}</p>
+ <div class="botoes">
+  <button class="button-next" (click)="endQuestion()">Encerrar Perguntas</button>
+  <button class="button-next" (click)="nextQuestion()">Próxima Pergunta</button>
+</div>
+</div>
+
