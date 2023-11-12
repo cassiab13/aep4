@@ -1,3 +1,4 @@
+import { CalcularTotalPontosService } from './../../service/calcular-total-pontos.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class MateriaJavaComponent {
 
-    constructor(private router: Router){}
+    constructor(
+      private router: Router,
+      private totalPointsCalculator: CalcularTotalPontosService){}
 
     questions = [
 {
@@ -83,20 +86,30 @@ export class MateriaJavaComponent {
 
   currentQuestionIndex = 0;
   score = 0;
+  totalPoints!: number;
+  endQuiz = false;
 
 
   checkAnswer(option: { label: string, isCorrect: boolean }) {
+    if(this.endQuiz){
+      return;
+    } else {
     if (option.isCorrect) {
       this.score++;
     }
     this.nextQuestion();
   }
+  }
 
   nextQuestion() {
     if (this.currentQuestionIndex < this.questions.length-1) {
       this.currentQuestionIndex++;
+    } else {
+      this.endQuiz = true
+
+    };
     }
-  }
+
 
   endQuestion(){
     this.router.navigate(['/start']);
@@ -105,4 +118,9 @@ export class MateriaJavaComponent {
   generateAlphabetLetter(index: number): string {
     return String.fromCharCode(97 + index);
   }
+
+  pointsCalculate() {
+    this.totalPointsCalculator.addPoints(this.score);
+  }
+
 }

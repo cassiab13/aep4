@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CalcularTotalPontosService } from 'src/app/service/calcular-total-pontos.service';
 
 @Component({
   selector: 'app-materia-estrutura-dados',
@@ -8,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class MateriaEstruturaDadosComponent {
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private totalPointsCalculator: CalcularTotalPontosService
+    ){}
   questions = [
     {
       question: 'O que são estruturas de dados em programação?',
@@ -95,6 +99,8 @@ export class MateriaEstruturaDadosComponent {
 
     currentQuestionIndex = 0;
     score = 0;
+    totalPoints!:number;
+    endQuiz = false;
 
 
     checkAnswer(option: { label: string, isCorrect: boolean }) {
@@ -107,7 +113,7 @@ export class MateriaEstruturaDadosComponent {
     nextQuestion() {
       if (this.currentQuestionIndex < this.questions.length-1) {
         this.currentQuestionIndex++;
-      }
+      } this.endQuiz = true;
     }
 
     endQuestion(){
@@ -117,4 +123,8 @@ export class MateriaEstruturaDadosComponent {
     generateAlphabetLetter(index: number): string {
       return String.fromCharCode(97 + index);
     }
+    pointsCalculate() {
+      this.totalPointsCalculator.addPoints(this.score);
+    }
+
 }
