@@ -1,19 +1,23 @@
 import { CalcularTotalPontosService } from './../../service/calcular-total-pontos.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { QuizService } from 'src/app/service/quiz.service';
 
 
 @Component({
   selector: 'app-materia-java',
   templateUrl: './materia-java.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['../quiz-question/quiz-question.component.css']
 })
-export class MateriaJavaComponent {
-
+export class MateriaJavaComponent implements OnInit{
     constructor(
+      private quizService: QuizService,
       private router: Router,
       private totalPointsCalculator: CalcularTotalPontosService){}
 
+      ngOnInit(): void {
+        this.quizService.setQuestions(this.questions);
+      }
     questions = [
 {
   question: 'O que é uma JVM em Java?',
@@ -91,32 +95,27 @@ export class MateriaJavaComponent {
 
 
   checkAnswer(option: { label: string, isCorrect: boolean }) {
-    if(this.endQuiz){
+    if (this.endQuiz) {
       return;
-    } else {
+    }
+
     if (option.isCorrect) {
       this.score++;
     }
     this.nextQuestion();
   }
-  }
 
   nextQuestion() {
-    if (this.currentQuestionIndex < this.questions.length-1) {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
       this.currentQuestionIndex++;
     } else {
-      this.endQuiz = true
-
-    };
+      this.endQuiz = true;
+      this.pointsCalculate();
     }
-
-
-  endQuestion(){
-    this.router.navigate(['/start']);
   }
 
-  generateAlphabetLetter(index: number): string {
-    return String.fromCharCode(97 + index);
+  endQuestion() {
+    this.router.navigate(['/start']);
   }
 
   pointsCalculate() {

@@ -8,6 +8,7 @@ import { MateriaJavaComponent } from './components/materia-java/materia-java.com
 import { MateriaEstruturaDadosComponent } from './components/materia-estrutura-dados/materia-estrutura-dados.component';
 import { MateriaBancoDadosComponent } from './components/materia-banco-dados/materia-banco-dados.component';
 import { MateriaTesteComponent } from './components/materia-teste/materia-teste.component';
+import { QuizQuestionComponent } from './components/quiz-question/quiz-question.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MateriaTesteComponent } from './components/materia-teste/materia-teste.
     MateriaJavaComponent,
     MateriaEstruturaDadosComponent,
     MateriaBancoDadosComponent,
-    MateriaTesteComponent
+    MateriaTesteComponent,
+    QuizQuestionComponent
   ],
   imports: [
     BrowserModule,

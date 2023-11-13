@@ -13,6 +13,8 @@ export class CalcularTotalPontosService {
   }
 
   endScore(){
+    console.log(this.finalScore);
     return this.finalScore;
+
   }
 }

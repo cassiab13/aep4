@@ -5,7 +5,7 @@ import { CalcularTotalPontosService } from 'src/app/service/calcular-total-ponto
 @Component({
   selector: 'app-materia-banco-dados',
   templateUrl: './materia-banco-dados.component.html',
-  styleUrls: ['./materia-banco-dados.component.css']
+  styleUrls: ['../quiz-question/quiz-question.component.css']
 })
 export class MateriaBancoDadosComponent {
   constructor(

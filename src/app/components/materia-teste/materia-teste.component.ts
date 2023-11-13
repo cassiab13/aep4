@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalcularTotalPontosService } from 'src/app/service/calcular-total-pontos.service';
+import { QuizService } from 'src/app/service/quiz.service';
 
 @Component({
   selector: 'app-materia-teste',
   templateUrl: './materia-teste.component.html',
-  styleUrls: ['./materia-teste.component.css']
+  styleUrls: ['../quiz-question/quiz-question.component.css']
 })
 export class MateriaTesteComponent {
   constructor(
+    private quizService: QuizService,
     private router: Router,
     private totalPointsCalculator: CalcularTotalPontosService){}
 
@@ -136,41 +138,38 @@ export class MateriaTesteComponent {
     ];
 
 
-currentQuestionIndex = 0;
-score = 0;
-totalPoints!: number;
-endQuiz = false;
+    currentQuestionIndex = 0;
+    score = 0;
+    totalPoints!: number;
+    endQuiz = false;
 
 
-checkAnswer(option: { label: string, isCorrect: boolean }) {
-  if(this.endQuiz){
-    return;
-  } else {
-  if (option.isCorrect) {
-    this.score++;
-  }
-  this.nextQuestion();
-}
-}
+    checkAnswer(option: { label: string, isCorrect: boolean }) {
+      if (this.endQuiz) {
+        return;
+      }
 
-nextQuestion() {
-  if (this.currentQuestionIndex < this.questions.length-1) {
-    this.currentQuestionIndex++;
-  } else {
-    this.endQuiz = true;
-  }
-}
+      if (option.isCorrect) {
+        this.score++;
+      }
+      this.nextQuestion();
+    }
 
-endQuestion(){
-  this.router.navigate(['/start']);
-}
+    nextQuestion() {
+      if (this.currentQuestionIndex < this.questions.length - 1) {
+        this.currentQuestionIndex++;
+      } else {
+        this.endQuiz = true;
+        this.pointsCalculate();
+      }
+    }
 
-generateAlphabetLetter(index: number): string {
-  return String.fromCharCode(97 + index);
-}
+    endQuestion() {
+      this.router.navigate(['/start']);
+    }
 
-pointsCalculate() {
-  this.totalPointsCalculator.addPoints(this.score);
-}
+    pointsCalculate() {
+      this.totalPointsCalculator.addPoints(this.score);
+    }
 
 }

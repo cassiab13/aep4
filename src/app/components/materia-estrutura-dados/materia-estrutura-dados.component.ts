@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { QuizService } from './../../service/quiz.service';
 import { CalcularTotalPontosService } from 'src/app/service/calcular-total-pontos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-materia-estrutura-dados',
   templateUrl: './materia-estrutura-dados.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['../quiz-question/quiz-question.component.css']
 })
-export class MateriaEstruturaDadosComponent {
+export class MateriaEstruturaDadosComponent implements OnInit{
+  currentQuestionIndex: number = 0;
+  endQuiz: boolean = false;
+  score: number = 0;
 
   constructor(
+    private quizService: QuizService,
     private router: Router,
-    private totalPointsCalculator: CalcularTotalPontosService
-    ){}
+    private totalPointsCalculator: CalcularTotalPontosService) {}
+
+    ngOnInit(): void {
+      this.quizService.setQuestions(this.questions);
+    }
   questions = [
     {
       question: 'O que são estruturas de dados em programação?',
@@ -94,37 +102,33 @@ export class MateriaEstruturaDadosComponent {
                 {label: 'pop', isCorrect: false}
               ]
      },
+  ];
 
-    ]
-
-    currentQuestionIndex = 0;
-    score = 0;
-    totalPoints!:number;
-    endQuiz = false;
-
-
-    checkAnswer(option: { label: string, isCorrect: boolean }) {
-      if (option.isCorrect) {
-        this.score++;
-      }
-      this.nextQuestion();
+  checkAnswer(option: { label: string, isCorrect: boolean }) {
+    if (this.endQuiz) {
+      return;
     }
 
-    nextQuestion() {
-      if (this.currentQuestionIndex < this.questions.length-1) {
-        this.currentQuestionIndex++;
-      } this.endQuiz = true;
+    if (option.isCorrect) {
+      this.score++;
     }
+    this.nextQuestion();
+  }
 
-    endQuestion(){
-      this.router.navigate(['/start']);
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    } else {
+      this.endQuiz = true;
+      this.pointsCalculate();
     }
+  }
 
-    generateAlphabetLetter(index: number): string {
-      return String.fromCharCode(97 + index);
-    }
-    pointsCalculate() {
-      this.totalPointsCalculator.addPoints(this.score);
-    }
+  endQuestion() {
+    this.router.navigate(['/start']);
+  }
 
+  pointsCalculate() {
+    this.totalPointsCalculator.addPoints(this.score);
+  }
 }
