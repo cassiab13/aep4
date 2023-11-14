@@ -10,7 +10,6 @@ import { QuizService } from 'src/app/service/quiz.service';
 })
 export class MateriaTesteComponent {
   constructor(
-    private quizService: QuizService,
     private router: Router,
     private totalPointsCalculator: CalcularTotalPontosService){}
 
@@ -142,6 +141,7 @@ export class MateriaTesteComponent {
     score = 0;
     totalPoints!: number;
     endQuiz = false;
+    showAnswers: boolean = false;
 
 
     checkAnswer(option: { label: string, isCorrect: boolean }) {
@@ -170,6 +170,14 @@ export class MateriaTesteComponent {
 
     pointsCalculate() {
       this.totalPointsCalculator.addPoints(this.score);
+    }
+
+    showAnswersAndScore() {
+      this.showAnswers = true;
+    }
+
+    generateAlphabetLetter(index: number): string {
+      return String.fromCharCode(97 + index);
     }
 
 }

@@ -12,6 +12,8 @@ export class QuizQuestionComponent implements OnChanges {
   @Output() answerSelected = new EventEmitter<any>();
   @Output() endQuizClicked = new EventEmitter<void>();
 
+questions: any;
+
   ngOnChanges(){
   }
   checkAnswer(option: any) {
@@ -25,4 +27,5 @@ export class QuizQuestionComponent implements OnChanges {
   generateAlphabetLetter(index: number): string {
     return String.fromCharCode(97 + index);
   }
+
 }

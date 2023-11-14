@@ -92,6 +92,7 @@ export class MateriaJavaComponent implements OnInit{
   score = 0;
   totalPoints!: number;
   endQuiz = false;
+  showAnswers: boolean = false;
 
 
   checkAnswer(option: { label: string, isCorrect: boolean }) {
@@ -120,6 +121,14 @@ export class MateriaJavaComponent implements OnInit{
 
   pointsCalculate() {
     this.totalPointsCalculator.addPoints(this.score);
+  }
+
+  showAnswersAndScore() {
+    this.showAnswers = true;
+  }
+
+  generateAlphabetLetter(index: number): string {
+    return String.fromCharCode(97 + index);
   }
 
 }

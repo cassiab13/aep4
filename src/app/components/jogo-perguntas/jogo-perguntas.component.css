@@ -39,13 +39,3 @@ button {
 button:hover {
   background-color: #3d3b50;
 }
-
-header {
-  margin: 0 auto;
-  background-color: #2415b3;
-  height: 450px;
-}
-
-img {
-  background-color: red;
-}

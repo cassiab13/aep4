@@ -132,6 +132,7 @@ currentQuestionIndex = 0;
 score = 0;
 totalPoints!: number;
 endQuiz = false;
+showAnswers: boolean = false;
 
 
 checkAnswer(option: { label: string, isCorrect: boolean }) {
@@ -163,6 +164,9 @@ generateAlphabetLetter(index: number): string {
 
 pointsCalculate() {
   this.totalPointsCalculator.addPoints(this.score);
+}
+showAnswersAndScore() {
+  this.showAnswers = true;
 }
 
 }

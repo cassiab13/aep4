@@ -1,8 +1,31 @@
-<app-quiz-question
-  *ngIf="questions && questions.length > 0"
-  [question]="questions[currentQuestionIndex]"
-  [endQuiz]="endQuiz"
-  [score]="score"
-  (answerSelected)="checkAnswer($event)"
-  (endQuizClicked)="endQuestion()">
-</app-quiz-question>
+<div class="quiz-container">
+  <ng-container *ngIf="!endQuiz && !showAnswers; else endQuizSection">
+    <app-quiz-question
+      [question]="questions[currentQuestionIndex]"
+      [endQuiz]="endQuiz"
+      [score]="score"
+      (answerSelected)="checkAnswer($event)"
+      (endQuizClicked)="endQuestion()">
+    </app-quiz-question>
+  </ng-container>
+
+  <ng-template #endQuizSection>
+    <button class="button-next" (click)="showAnswersAndScore()">Mostrar Respostas e Pontuação</button>
+    <p>Quiz concluído! Sua pontuação é {{ score }}</p>
+  </ng-template>
+
+  <div *ngIf="endQuiz && showAnswers">
+    <h2>Hora da revisão!!</h2>
+    <ul *ngFor="let q of questions; let i = index">
+      <li>
+        <h3>{{ q.question }}</h3>
+        <ul>
+          <li *ngFor="let option of q.options; let j = index">
+            <span class="correct-answer" *ngIf="option.isCorrect">✅</span>
+            {{ generateAlphabetLetter(j)+')' }} {{ option.label }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

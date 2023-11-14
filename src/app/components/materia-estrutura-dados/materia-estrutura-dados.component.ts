@@ -12,6 +12,7 @@ export class MateriaEstruturaDadosComponent implements OnInit{
   currentQuestionIndex: number = 0;
   endQuiz: boolean = false;
   score: number = 0;
+  showAnswers: boolean = false;
 
   constructor(
     private quizService: QuizService,
@@ -131,4 +132,13 @@ export class MateriaEstruturaDadosComponent implements OnInit{
   pointsCalculate() {
     this.totalPointsCalculator.addPoints(this.score);
   }
+
+  showAnswersAndScore() {
+    this.showAnswers = true;
+  }
+
+  generateAlphabetLetter(index: number): string {
+    return String.fromCharCode(97 + index);
+  }
+
 }
