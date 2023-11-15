@@ -1,14 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .container {
+  background-image: url("https://img.freepik.com/fotos-premium/vila-medieval-de-pixel-art-vila-de-casas-de-meia-idade-com-fundo-de-castelo-para-jogo-de-8-bits-ai_985124-967.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-end;
   height: 100vh;
   background-color: #f2f2f2;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  color: yellow;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card {
-  width: 250px;
-  height: 150px;
+  background-image: url("../../../assets/img/door.png");
+  background-size: cover;
+  background-position: center;
+  width: 130px;
+  height: 300px;
   padding: 20px;
   text-align: center;
   background-color: #fff;
