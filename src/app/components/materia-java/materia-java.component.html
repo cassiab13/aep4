@@ -1,31 +1,47 @@
-<div class="quiz-container">
-  <ng-container *ngIf="!endQuiz && !showAnswers; else endQuizSection">
+<div class="container">
+  <ng-container *ngIf="!endQuiz && !showAnswers">
     <app-quiz-question
       [question]="questions[currentQuestionIndex]"
       [endQuiz]="endQuiz"
       [score]="score"
       (answerSelected)="checkAnswer($event)"
-      (endQuizClicked)="endQuestion()">
+      (endQuizClicked)="endQuestion()"
+    >
     </app-quiz-question>
   </ng-container>
 
-  <ng-template #endQuizSection>
-    <button class="button-next" (click)="showAnswersAndScore()">Mostrar Respostas e Pontuação</button>
-    <p>Quiz concluído! Sua pontuação é {{ score }}</p>
-  </ng-template>
+  <ng-container *ngIf="endQuiz">
+    <div class="quiz">
+      <div class="result">
+        <p>Quiz concluído! Sua pontuação é {{ score }}</p>
+        <button class="button-next" (click)="showAnswersAndScore()">
+          Mostrar Respostas
+        </button>
+      </div>
+    </div>
+  </ng-container>
 
-  <div *ngIf="endQuiz && showAnswers">
-    <h2>Hora da revisão!!</h2>
-    <ul *ngFor="let q of questions; let i = index">
-      <li>
-        <h3>{{ q.question }}</h3>
-        <ul>
-          <li *ngFor="let option of q.options; let j = index">
-            <span class="correct-answer" *ngIf="option.isCorrect">✅</span>
-            {{ generateAlphabetLetter(j)+')' }} {{ option.label }}
+  <ng-container *ngIf="showAnswers">
+    <div class="final">
+      <h2>Hora da revisão!!</h2>
+      <ul *ngFor="let q of questions; let i = index">
+        <div class="content">
+          <li>
+            <h3>{{ q.question }}</h3>
+            <ul>
+              <li
+                [ngClass]="verifyCorrect(option.isCorrect)"
+                *ngFor="let option of q.options; let j = index"
+              >
+                {{ generateAlphabetLetter(j) + ")" }} {{ option.label }}
+              </li>
+            </ul>
           </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+        </div>
+      </ul>
+      <div class="button-back">
+        <button routerLink="/start">Novo Jogo</button>
+      </div>
+    </div>
+  </ng-container>
 </div>

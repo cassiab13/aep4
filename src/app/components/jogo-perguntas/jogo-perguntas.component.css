@@ -8,11 +8,27 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   background-color: #f2f2f2;
   flex-wrap: wrap;
+}
+
+.logo {
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  width: 350px;
+}
+
+.doors {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
 .item {
@@ -26,33 +42,58 @@
 .item-card {
   display: flex;
   align-items: center;
-  color: yellow;
-  flex-direction: column;
   justify-content: center;
+  flex-wrap: wrap;
+  min-height: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #3b3b3b;
+  min-width: 180px;
+  transition: 0.3s;
+}
+
+.item-card:hover {
+  background-color: #3d3b50;
+  cursor: pointer;
+}
+
+.blue {
+  color: rgb(114, 225, 245);
+  border-top: 3px solid rgb(114, 225, 245);
+}
+
+.red {
+  color: rgb(236, 109, 109);
+  border-top: 3px solid rgb(236, 109, 109);
+}
+
+.green {
+  color: rgb(114, 238, 124);
+  border-top: 3px solid rgb(114, 238, 124);
+}
+
+.yellow {
+  color: rgb(243, 232, 130);
+  border-top: 3px solid rgb(243, 232, 130);
 }
 
 .card {
   background-image: url("../../../assets/img/door.png");
-  background-size: cover;
+  background-size: 90% 100%;
+  background-repeat: no-repeat;
   background-position: center;
-  width: 130px;
+  width: 260px;
   height: 300px;
   padding: 20px;
   text-align: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  transition: transform 3s;
   cursor: pointer;
 }
 
 .card:hover {
-  transform: scale(1.05);
-}
-
-h2 {
-  font-size: 24px;
-  margin: 10px 0;
+  background-image: url("../../../assets/img/door-open.png");
 }
 
 button {

@@ -1,16 +1,24 @@
-<div class="quiz-container">
-  <div *ngIf="!endQuiz">
-    <h2>{{ question.question }}</h2>
-    <ul>
-      <li *ngFor="let option of question.options; let i = index">
-        <button class="button-option" (click)="checkAnswer(option)">
-          {{ generateAlphabetLetter(i)+')' }} {{ option.label }}
-        </button>
-      </li>
-    </ul>
-    <p class="score">Pontuação: {{ score }}</p>
-    <div class="botoes">
-      <button class="button-next" (click)="endQuestion()">Encerrar Perguntas</button>
+<div class="container">
+  <div class="quiz">
+    <div class="caixa">
+      <div *ngIf="!endQuiz">
+        <h2>{{ question.question }}</h2>
+        <ul>
+          <li *ngFor="let option of question.options; let i = index">
+            <button class="button-option" (click)="checkAnswer(option)">
+              {{ generateAlphabetLetter(i) + ")" }} {{ option.label }}
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <div class="encerrar">
+    <button class="button-encerrar" (click)="endQuestion()">
+      Encerrar Perguntas
+    </button>
+  </div>
+  <div class="pontuacao">
+    <p class="score">Pontuação: {{ score }}</p>
   </div>
 </div>
